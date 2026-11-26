@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حدائق الشام للمأكولات السورية | حدائق الأهرام</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo & Amiri & Reem Kufi -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700;800;900&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                        serif: ['Amiri', 'serif'],
+                        kufi: ['Reem Kufi', 'sans-serif'],
+                    },
+                    colors: {
+                        sham: {
+                            dark: '#0A1612',
+                            card: '#11221C',
+                            gold: '#D4AF37',
+                            amber: '#F59E0B',
+                            crimson: '#B91C1C',
+                            cream: '#FDFBF7',
+                            emerald: '#064E3B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0A1612;
+            color: #FDFBF7;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Damascene Geometric Background Pattern */
+        .damask-pattern {
+            background-color: #0A1612;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FDE68A 0%, #D4AF37 50%, #B45309 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-glow {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .gold-border-glow:hover {
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.3);
+            border-color: rgba(212, 175, 55, 0.65);
+        }
+
+        /* Hide scrollbars for horizontal category bar */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom Animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: floatSlow 4s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(185, 28, 28, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.8); }
+        }
+        .offer-pulse {
+            animation: pulseGlow 2.5s infinite;
+        }
+    </style>
+</head>
+<body class="damask-pattern antialiased selection:bg-sham-gold selection:text-sham-dark">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2 pointer-events-none w-11/12 max-w-md"></div>
+
+    <!-- Top Hospitality Status Bar -->
+    <div class="bg-gradient-to-l from-sham-emerald via-sham-dark to-sham-emerald border-b border-sham-gold/25 py-2 px-4 text-xs sm:text-sm">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span class="text-emerald-300 font-semibold">مفتوح الآن • توصيل سريع لجميع بوابات حدائق الأهرام</span>
+            </div>
+            <div class="flex items-center gap-3 text-sham-cream/85">
+                <span class="hidden md:inline"><i class="fa-solid fa-location-dot text-sham-gold ml-1"></i> 97 هـ - البوابة التانية (خفرع)</span>
+                <a href="tel:01062327700" class="text-sham-gold font-bold hover:underline flex items-center gap-1">
+                    <i class="fa-solid fa-phone-volume"></i> 01062327700
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Sticky Navbar -->
+    <header class="sticky top-0 z-40 bg-sham-dark/90 backdrop-blur-lg border-b border-sham-gold/20">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <!-- Brand Identity -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sham-crimson via-red-800 to-sham-dark border border-sham-gold/50 flex items-center justify-center shadow-lg group-hover:scale-105 transition">
+                    <!-- Custom Levantine Emblem SVG -->
+                    <svg class="w-7 h-7 text-sham-gold" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L14.8 8.5L22 9.2L16.5 14L18.2 21L12 17.3L5.8 21L7.5 14L2 9.2L9.2 8.5L12 2Z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-kufi text-xl sm:text-2xl font-bold gold-gradient-text leading-tight">حدائق الشام</h1>
+                    <p class="text-[11px] sm:text-xs text-sham-cream/75 tracking-wide">للمأكولات السورية الأصيلة • حدائق الأهرام</p>
+                </div>
+            </a>
+
+            <!-- Quick Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-sham-cream/80">
+                <a href="#special-offer" class="hover:text-sham-gold transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-sham-crimson"></span> عرض الفرخة 340ج
+                </a>
+                <a href="#smart-feast" class="hover:text-sham-gold transition">حاسبة العزومة الذكية</a>
+                <a href="#menu-section" class="hover:text-sham-gold transition">المنيو الكامل</a>
+                <a href="#branch-info" class="hover:text-sham-gold transition">العنوان وأرقام الدليفري</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button onclick="openFeastModal()" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-sham-card border border-sham-gold/40 text-sham-gold text-xs sm:text-sm font-bold hover:bg-sham-gold hover:text-sham-dark transition">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>اقترحلي أكلة</span>
+                </button>
+
+                <!-- Cart Button -->
+                <button onclick="toggleCart(true)" class="relative flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-gradient-to-l from-sham-gold to-amber-500 text-sham-dark font-extrabold text-sm shadow-lg hover:brightness-110 transition active:scale-95">
+                    <i class="fa-solid fa-bag-shopping text-base"></i>
+                    <span class="hidden xs:inline">سلة الطلبات</span>
+                    <span id="nav-cart-count" class="bg-sham-dark text-sham-gold text-xs font-black px-2 py-0.5 rounded-full">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION + SPECIAL OFFER SPOTLIGHT -->
+    <section id="special-offer" class="relative overflow-hidden pt-8 pb-14 sm:pt-12 sm:pb-20 px-4">
+        <!-- Decorative Ambient Glows -->
+        <div class="absolute -top-24 -right-24 w-80 h-80 bg-sham-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-32 -left-24 w-80 h-80 bg-sham-crimson/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- Hero Text Content -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-right">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sham-gold/10 border border-sham-gold/30 text-sham-gold text-xs sm:text-sm font-bold">
+                    <i class="fa-solid fa-crown"></i>
+                    <span>أصل الشاورما والمشويات الدمشقية في قلب حدائق الأهرام</span>
+                </div>
+
+                <h2 class="font-kufi text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white">
+                    طعم الشام الأصيل..
+                    <span class="block gold-gradient-text mt-1">على أصوله ومن قلب النار!</span>
+                </h2>
+
+                <p class="text-sham-cream/80 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    من سيخ الشاورما المتبل بخلطتنا السرية، للفراخ المشوية عالفحم والشواية، للمناقيش الشامية السخنة من الفرن.. اطلب أونلاين ووصلك سخن لحد باب بيتك في حدائق الأهرام.
+                </p>
+
+                <!-- Primary CTA Row -->
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+                    <a href="#menu-section" class="px-6 py-3.5 rounded-2xl bg-gradient-to-l from-sham-gold to-amber-500 text-sham-dark font-extrabold text-base shadow-xl hover:brightness-110 transition flex items-center gap-2">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span>تصفح المنيو الكامل</span>
+                    </a>
+                    <button onclick="openFeastModal()" class="px-6 py-3.5 rounded-2xl bg-sham-card/90 border border-sham-gold/40 text-sham-cream font-bold text-base hover:border-sham-gold hover:text-sham-gold transition flex items-center gap-2">
+                        <i class="fa-solid fa-calculator text-sham-gold"></i>
+                        <span>حاسبة العزومة الذكية</span>
+                    </button>
+                </div>
+
+                <!-- Quick Stats / Trust Badges -->
+                <div class="grid grid-cols-3 gap-3 pt-4 max-w-lg mx-auto lg:mx-0">
+                    <div class="bg-sham-card/60 border border-sham-gold/15 rounded-2xl p-3 text-center">
+                        <div class="text-sham-gold font-black text-lg sm:text-xl">+140</div>
+                        <div class="text-xs text-sham-cream/70">صنف سوري وغربي</div>
+                    </div>
+                    <div class="bg-sham-card/60 border border-sham-gold/15 rounded-2xl p-3 text-center">
+                        <div class="text-sham-gold font-black text-lg sm:text-xl">100%</div>
+                        <div class="text-xs text-sham-cream/70">تتبيلة شامية طازجة</div>
+                    </div>
+                    <div class="bg-sham-card/60 border border-sham-gold/15 rounded-2xl p-3 text-center">
+                        <div class="text-sham-gold font-black text-lg sm:text-xl">بوابة خفرع</div>
+                        <div class="text-xs text-sham-cream/70">توصيل لكل البوابات</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Special Offer Flyer Card (فرخة 340 جنيه) -->
+            <div class="lg:col-span-5">
+                <div class="relative rounded-3xl bg-gradient-to-b from-[#1A2E26] via-sham-card to-[#0D1B16] p-6 sm:p-7 gold-border-glow offer-pulse">
+                    <!-- Top Ribbon Badge -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3.5 py-1 rounded-full bg-sham-crimson text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md flex items-center gap-1.5">
+                            <i class="fa-solid fa-fire-flame-curved text-amber-300"></i> عرض خاص لفترة محدودة
+                        </span>
+                        <span class="text-xs text-sham-gold font-bold">حدائق الشام</span>
+                    </div>
+
+                    <!-- Illustrated Roast Chicken Emblem & Price Seal -->
+                    <div class="relative bg-gradient-to-br from-amber-950/50 to-sham-dark rounded-2xl p-5 border border-sham-gold/25 mb-5 flex items-center justify-between gap-4">
+                        <div>
+                            <h3 class="font-kufi text-2xl sm:text-3xl font-bold text-white leading-snug">
+                                الفرخة المشوية
+                            </h3>
+                            <p class="text-amber-300 font-bold text-sm mt-1">
+                                <i class="fa-solid fa-fire ml-1"></i> اختيارك: شواية أو على الفحم
+                            </p>
+                            <div class="mt-3 flex items-baseline gap-2">
+                                <span class="text-4xl sm:text-5xl font-black gold-gradient-text">340</span>
+                                <span class="text-base font-bold text-sham-gold">جنيه</span>
+                                <span class="text-sm text-red-400 line-through font-semibold mr-1">بدل 400 ج</span>
+                            </div>
+                        </div>
+
+                        <!-- Custom SVG Roast Chicken Illustration -->
+                        <div class="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-2xl bg-gradient-to-tr from-sham-crimson/30 to-sham-gold/20 border border-sham-gold/30 flex items-center justify-center animate-float">
+                            <svg class="w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 100 100" fill="none">
+                                <ellipse cx="50" cy="78" rx="36" ry="10" fill="#D4AF37" fill-opacity="0.25"/>
+                                <path d="M25 62C22 45 35 32 54 33C70 34 79 46 76 60C74 70 62 74 48 74C34 74 27 70 25 62Z" fill="url(#chickenGrad)"/>
+                                <path d="M72 46C80 42 88 46 86 53C84 58 76 58 72 55" stroke="#FDE68A" stroke-width="4" stroke-linecap="round"/>
+                                <circle cx="87" cy="45" r="3" fill="#FDFBF7"/>
+                                <circle cx="89" cy="49" r="3" fill="#FDFBF7"/>
+                                <path d="M40 42C45 39 53 39 58 42" stroke="#FDE68A" stroke-width="2.5" stroke-linecap="round"/>
+                                <path d="M36 50C44 47 55 47 62 50" stroke="#FDE68A" stroke-width="2.5" stroke-linecap="round"/>
+                                <defs>
+                                    <linearGradient id="chickenGrad" x1="25" y1="33" x2="76" y2="74" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#F59E0B"/>
+                                        <stop offset="0.55" stop-color="#B45309"/>
+                                        <stop offset="1" stop-color="#7F1D1D"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Included Accompaniments (تقدم مع) -->
+                    <div class="mb-5">
+                        <p class="text-xs font-bold text-sham-gold mb-2.5 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check"></i> الوجبة الكاملة تقدم مع 5 إضافات مجاناً:
+                        </p>
+                        <div class="grid grid-cols-5 gap-1.5 text-center">
+                            <div class="bg-sham-dark/80 border border-sham-gold/20 rounded-xl py-2 px-1">
+                                <div class="text-base">🍚</div>
+                                <div class="text-[11px] font-bold text-sham-cream mt-0.5">رز</div>
+                            </div>
+                            <div class="bg-sham-dark/80 border border-sham-gold/20 rounded-xl py-2 px-1">
+                                <div class="text-base">🍟</div>
+                                <div class="text-[11px] font-bold text-sham-cream mt-0.5">بطاطس</div>
+                            </div>
+                            <div class="bg-sham-dark/80 border border-sham-gold/20 rounded-xl py-2 px-1">
+                                <div class="text-base">🧄</div>
+                                <div class="text-[11px] font-bold text-sham-cream mt-0.5">تومية</div>
+                            </div>
+                            <div class="bg-sham-dark/80 border border-sham-gold/20 rounded-xl py-2 px-1">
+                                <div class="text-base">🥒</div>
+                                <div class="text-[11px] font-bold text-sham-cream mt-0.5">مخلل</div>
+                            </div>
+                            <div class="bg-sham-dark/80 border border-sham-gold/20 rounded-xl py-2 px-1">
+                                <div class="text-base">🫓</div>
+                                <div class="text-[11px] font-bold text-sham-cream mt-0.5">عيش</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cooking Style Toggle & Order Now Button -->
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-2 gap-2 bg-sham-dark p-1.5 rounded-xl border border-sham-gold/20">
+                            <button type="button" id="offer-opt-grill" onclick="selectOfferType('على الفحم')" class="py-2 rounded-lg text-xs sm:text-sm font-bold bg-sham-gold text-sham-dark transition">
+                                🔥 على الفحم
+                            </button>
+                            <button type="button" id="offer-opt-rotisserie" onclick="selectOfferType('شواية')" class="py-2 rounded-lg text-xs sm:text-sm font-bold text-sham-cream/75 hover:text-white transition">
+                                🔄 شواية
+                            </button>
+                        </div>
+
+                        <button onclick="addSpecialOfferToCart()" class="w-full py-3.5 rounded-xl bg-gradient-to-l from-sham-crimson via-red-600 to-amber-600 text-white font-extrabold text-base shadow-lg hover:brightness-110 transition flex items-center justify-center gap-2 active:scale-98">
+                            <i class="fa-solid fa-cart-plus"></i>
+                            <span>اطلب عرض الفرخة الآن (340 ج.م)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CREATIVE ADD-ON: SMART FEAST CALCULATOR & MOOD RECOMMENDER -->
+    <section id="smart-feast" class="py-10 px-4 border-y border-sham-gold/15 bg-sham-card/40">
+        <div class="max-w-7xl mx-auto">
+            <div class="rounded-3xl bg-gradient-to-l from-sham-card via-[#132922] to-sham-card border border-sham-gold/30 p-6 sm:p-8 shadow-2xl">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                    <div class="space-y-2 max-w-xl">
+                        <span class="inline-flex items-center gap-1.5 text-xs font-bold text-sham-gold bg-sham-gold/10 px-3 py-1 rounded-full">
+                            <i class="fa-solid fa-sparkles"></i> ميزة حصرية من حدائق الشام
+                        </span>
+                        <h3 class="font-kufi text-2xl sm:text-3xl font-bold text-white">
+                            محتار تطلب إيه؟ جرب <span class="text-sham-gold">حاسبة العزومة الذكية</span>
+                        </h3>
+                        <p class="text-sm text-sham-cream/75">
+                            حدد عدد الأفراد ومزاجك في الأكل، وهنرشحلك أنسب صينية أو وجبات من المنيو بأفضل سعر!
+                        </p>
+                    </div>
+
+                    <!-- Interactive Controls -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 flex-1">
+                        <div>
+                            <label class="block text-xs text-sham-gold font-bold mb-1.5">عدد الأفراد</label>
+                            <select id="feast-people" onchange="generateFeastSuggestion()" class="w-full bg-sham-dark border border-sham-gold/30 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sham-gold">
+                                <option value="1">فرد واحد (أكلة سريعة)</option>
+                                <option value="2">فردين (دبل)</option>
+                                <option value="4" selected>شلة صحاب (3 - 5 أفراد)</option>
+                                <option value="7">عزومة عائلة (6+ أفراد)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-sham-gold font-bold mb-1.5">مزاجك رايح لإيه؟</label>
+                            <select id="feast-mood" onchange="generateFeastSuggestion()" class="w-full bg-sham-dark border border-sham-gold/30 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-sham-gold">
+                                <option value="mix" selected>تشكيلة شامية ومشويات</option>
+                                <option value="shawarma">شاورما سوري وفتة</option>
+                                <option value="chicken">فراخ مشوية وبروستد</option>
+                                <option value="baked">مناقيش وبيتزا وطواجن</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="generateFeastSuggestion(true)" class="w-full py-2.5 px-4 rounded-xl bg-sham-gold text-sham-dark font-extrabold text-sm hover:bg-amber-400 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-rotate"></i>
+                                <span>اقترحلي وجبة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Recommendation Result Box -->
+                <div id="feast-result-box" class="mt-6 pt-5 border-t border-sham-gold/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FULL INTERACTIVE MENU SECTION -->
+    <main id="menu-section" class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Section Header & Search -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+            <div>
+                <h2 class="font-kufi text-3xl sm:text-4xl font-bold text-white">
+                    قائمة طعام <span class="gold-gradient-text">حدائق الشام</span>
+                </h2>
+                <p class="text-sm text-sham-cream/70 mt-1">اختر القسم أو ابحث باسم الصنف، واضغط على أي صنف لاختيار نوع العيش أو الحجم والإضافات</p>
+            </div>
+
+            <!-- Live Search Input -->
+            <div class="relative w-full md:w-96">
+                <input type="text" id="menu-search" oninput="handleSearch(this.value)" placeholder="ابحث عن شاورما، كفتة، مناقيش، طاجن..." class="w-full bg-sham-card border border-sham-gold/35 rounded-2xl py-3 pr-11 pl-10 text-sm text-white placeholder-sham-cream/45 focus:outline-none focus:border-sham-gold transition">
+                <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-sham-gold"></i>
+                <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute left-3 top-1/2 -translate-y-1/2 text-sham-cream/50 hover:text-white">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sticky Category Filter Pills -->
+        <div class="sticky top-[68px] z-30 bg-sham-dark/95 backdrop-blur-md py-3 -mx-4 px-4 mb-8 border-b border-sham-gold/15">
+            <div id="category-tabs" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                <!-- Category buttons rendered by JS -->
+            </div>
+        </div>
+
+        <!-- Menu Items Grid -->
+        <div id="menu-container" class="space-y-12">
+            <!-- Categorized menu sections rendered by JS -->
+        </div>
+
+        <!-- Empty Search State -->
+        <div id="empty-search" class="hidden text-center py-16 bg-sham-card/50 rounded-3xl border border-sham-gold/20">
+            <div class="text-5xl mb-3">🍽️</div>
+            <h3 class="text-xl font-bold text-white">لم نجد صنفاً بهذا الاسم</h3>
+            <p class="text-sm text-sham-cream/70 mt-1 mb-4">جرب البحث بكلمة أخرى مثل: شاورما، فراخ، كفتة، بيتزا، مناقيش</p>
+            <button onclick="clearSearch()" class="px-5 py-2.5 rounded-xl bg-sham-gold text-sham-dark font-bold text-sm">عرض كل المنيو</button>
+        </div>
+    </main>
+
+    <!-- BRANCH LOCATION & DIRECT CALL NUMBERS SECTION -->
+    <section id="branch-info" class="max-w-7xl mx-auto px-4 pb-16">
+        <div class="rounded-3xl bg-gradient-to-br from-sham-card to-[#0D1A15] border border-sham-gold/30 p-6 sm:p-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sham-gold/15 text-sham-gold text-xs font-bold">
+                        <i class="fa-solid fa-store"></i> فرع حدائق الأهرام
+                    </div>
+                    <h3 class="font-kufi text-2xl sm:text-3xl font-bold text-white">
+                        تشرفونا في <span class="text-sham-gold">حدائق الشام</span> أو اطلب دليفري
+                    </h3>
+                    <p class="text-sham-cream/85 text-base flex items-start gap-2.5">
+                        <i class="fa-solid fa-location-dot text-sham-crimson text-xl mt-1"></i>
+                        <span><strong>العنوان:</strong> 97 هـ - البوابة التانية (بوابة خفرع) - حدائق الأهرام، الجيزة</span>
+                    </p>
+                    <p class="text-sham-cream/75 text-sm">
+                        خدمة توصيل سريعة ومجهزة بحافظات حرارية لضمان وصول المشويات والشاورما والمناقيش طازجة وساخنة.
+                    </p>
+                </div>
+
+                <!-- 4 Phone Numbers Grid -->
+                <div class="bg-sham-dark/70 rounded-2xl p-5 border border-sham-gold/20">
+                    <h4 class="text-sm font-bold text-sham-gold mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-headset"></i> أرقام خدمة التوصيل المباشرة (اضغط للاتصال):
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <a href="tel:01062327700" class="flex items-center justify-between p-3.5 rounded-xl bg-sham-card border border-sham-gold/25 hover:border-sham-gold hover:bg-sham-gold/10 transition group">
+                            <span class="font-extrabold text-white tracking-wider group-hover:text-sham-gold">01062327700</span>
+                            <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-phone"></i></span>
+                        </a>
+                        <a href="tel:01111603234" class="flex items-center justify-between p-3.5 rounded-xl bg-sham-card border border-sham-gold/25 hover:border-sham-gold hover:bg-sham-gold/10 transition group">
+                            <span class="font-extrabold text-white tracking-wider group-hover:text-sham-gold">01111603234</span>
+                            <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-phone"></i></span>
+                        </a>
+                        <a href="tel:01289802088" class="flex items-center justify-between p-3.5 rounded-xl bg-sham-card border border-sham-gold/25 hover:border-sham-gold hover:bg-sham-gold/10 transition group">
+                            <span class="font-extrabold text-white tracking-wider group-hover:text-sham-gold">01289802088</span>
+                            <span class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-phone"></i></span>
+                        </a>
+                        <a href="tel:0233808017" class="flex items-center justify-between p-3.5 rounded-xl bg-sham-card border border-sham-gold/25 hover:border-sham-gold hover:bg-sham-gold/10 transition group">
+                            <span class="font-extrabold text-white tracking-wider group-hover:text-sham-gold">0233808017</span>
+                            <span class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center"><i class="fa-solid fa-phone-flip"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-sham-gold/20 bg-[#060E0B] py-8 px-4 text-center text-xs sm:text-sm text-sham-cream/60">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="font-kufi text-lg font-bold text-sham-gold">حدائق الشام للمأكولات السورية</span>
+                <span>• 97 هـ البوابة التانية (خفرع)</span>
+            </div>
+            <div>جميع الأسعار بالجنيه المصري (ج.م) • أهلاً بكم في بيت الكرم الشامي</div>
+        </div>
+    </footer>
+
+    <!-- Floating Mobile Bottom Cart Bar -->
+    <div id="mobile-floating-bar" class="fixed bottom-4 inset-x-4 z-30 md:hidden hidden">
+        <button onclick="toggleCart(true)" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-l from-sham-gold to-amber-500 text-sham-dark font-black shadow-2xl flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <span id="mobile-cart-badge" class="bg-sham-dark text-sham-gold px-2.5 py-0.5 rounded-full text-xs">0</span>
+                <span>عرض سلة الطلبات</span>
+            </div>
+            <span id="mobile-cart-total" class="text-base">0 ج.م</span>
+        </button>
+    </div>
+
+    <!-- ITEM CUSTOMIZATION MODAL (صمم وجبتك / اختر العيش أو الحجم) -->
+    <div id="customizer-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-sham-card border border-sham-gold/40 rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl animate-fadeIn">
+            <div class="p-5 sm:p-6 border-b border-sham-gold/20 flex items-start justify-between gap-4 bg-sham-dark/60">
+                <div>
+                    <span id="modal-item-cat" class="text-xs font-bold text-sham-gold">القسم</span>
+                    <h3 id="modal-item-name" class="text-xl sm:text-2xl font-extrabold text-white mt-0.5">اسم الصنف</h3>
+                    <p id="modal-item-desc" class="text-xs text-sham-cream/70 mt-1"></p>
+                </div>
+                <button onclick="closeCustomizer()" class="w-9 h-9 rounded-xl bg-sham-dark text-sham-cream/70 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-5 sm:p-6 space-y-5 max-h-[65vh] overflow-y-auto">
+                <!-- Variant / Bread / Size Selector -->
+                <div id="modal-variants-section">
+                    <label id="modal-variant-label" class="block text-sm font-bold text-sham-gold mb-2.5">اختر الحجم / النوع:</label>
+                    <div id="modal-variants-grid" class="grid grid-cols-2 gap-2.5">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+
+                <!-- Optional Extras -->
+                <div>
+                    <label class="block text-sm font-bold text-sham-gold mb-2.5">إضافات جانبية (اختياري):</label>
+                    <div class="grid grid-cols-2 gap-2 text-xs sm:text-sm">
+                        <label class="flex items-center justify-between p-2.5 rounded-xl bg-sham-dark border border-sham-gold/20 cursor-pointer hover:border-sham-gold/50">
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" class="addon-checkbox accent-amber-500" data-name="ثومية إضافية" data-price="20" onchange="updateModalPrice()">
+                                <span>ثومية إضافية</span>
+                            </div>
+                            <span class="text-sham-gold font-bold">+20 ج</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2.5 rounded-xl bg-sham-dark border border-sham-gold/20 cursor-pointer hover:border-sham-gold/50">
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" class="addon-checkbox accent-amber-500" data-name="صوص شيدر" data-price="20" onchange="updateModalPrice()">
+                                <span>صوص شيدر</span>
+                            </div>
+                            <span class="text-sham-gold font-bold">+20 ج</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2.5 rounded-xl bg-sham-dark border border-sham-gold/20 cursor-pointer hover:border-sham-gold/50">
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" class="addon-checkbox accent-amber-500" data-name="باكت بطاطس" data-price="35" onchange="updateModalPrice()">
+                                <span>باكت بطاطس</span>
+                            </div>
+                            <span class="text-sham-gold font-bold">+35 ج</span>
+                        </label>
+                        <label class="flex items-center justify-between p-2.5 rounded-xl bg-sham-dark border border-sham-gold/20 cursor-pointer hover:border-sham-gold/50">
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox" class="addon-checkbox accent-amber-500" data-name="مخلل سوري" data-price="15" onchange="updateModalPrice()">
+                                <span>مخلل سوري</span>
+                            </div>
+                            <span class="text-sham-gold font-bold">+15 ج</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Special Note -->
+                <div>
+                    <label class="block text-xs font-bold text-sham-cream/80 mb-1.5">ملاحظات على الصنف (بدون مخلل، سبايسي، إلخ):</label>
+                    <input type="text" id="modal-item-note" placeholder="اكتب ملاحظتك هنا..." class="w-full bg-sham-dark border border-sham-gold/25 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-sham-gold">
+                </div>
+            </div>
+
+            <!-- Footer Quantity & Add Button -->
+            <div class="p-5 bg-sham-dark/80 border-t border-sham-gold/20 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3 bg-sham-card border border-sham-gold/30 rounded-xl p-1">
+                    <button type="button" onclick="changeModalQty(-1)" class="w-9 h-9 rounded-lg bg-sham-dark text-white font-bold hover:text-sham-gold">-</button>
+                    <span id="modal-qty" class="font-extrabold text-base w-6 text-center">1</span>
+                    <button type="button" onclick="changeModalQty(1)" class="w-9 h-9 rounded-lg bg-sham-dark text-white font-bold hover:text-sham-gold">+</button>
+                </div>
+
+                <button onclick="confirmAddCustomizedItem()" class="flex-1 py-3 px-5 rounded-xl bg-gradient-to-l from-sham-gold to-amber-500 text-sham-dark font-black text-sm sm:text-base shadow-lg hover:brightness-110 transition flex items-center justify-between">
+                    <span>إضافة للسلة</span>
+                    <span id="modal-total-price">0 ج.م</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE-OVER CART & WHATSAPP CHECKOUT DRAWER -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+        <!-- Backdrop -->
+        <div onclick="toggleCart(false)" class="absolute inset-0 bg-black/75 backdrop-blur-sm"></div>
+
+        <!-- Drawer Content -->
+        <div class="relative mr-auto w-full max-w-md h-full bg-sham-dark border-r border-sham-gold/30 flex flex-col shadow-2xl">
+            <!-- Drawer Header -->
+            <div class="p-5 border-b border-sham-gold/20 flex items-center justify-between bg-sham-card">
+                <div class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-bag-shopping text-sham-gold text-xl"></i>
+                    <h3 class="font-kufi text-xl font-bold text-white">سلة طلباتك</h3>
+                </div>
+                <button onclick="toggleCart(false)" class="w-9 h-9 rounded-xl bg-sham-dark text-sham-cream/70 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Hospitality Progress Bar -->
+            <div class="bg-sham-emerald/30 border-b border-sham-gold/15 px-5 py-2.5 text-xs">
+                <div id="hospitality-msg" class="text-amber-300 font-semibold mb-1.5">أضف أصناف بقيمة 400 ج.م واحصل على علبة ثومية كبيرة هدية!</div>
+                <div class="w-full h-1.5 bg-sham-dark rounded-full overflow-hidden">
+                    <div id="hospitality-bar" class="h-full bg-gradient-to-l from-sham-gold to-emerald-400 transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cart-items-list" class="flex-1 overflow-y-auto p-5 space-y-3">
+                <!-- Rendered via JS -->
+            </div>
+
+            <!-- Delivery Details & Checkout Actions -->
+            <div id="cart-footer" class="p-5 bg-sham-card border-t border-sham-gold/25 space-y-4">
+                <div class="space-y-2.5">
+                    <input type="text" id="customer-name" placeholder="الاسم الكريم" class="w-full bg-sham-dark border border-sham-gold/25 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-sham-gold">
+                    <input type="text" id="customer-address" placeholder="العنوان بالتفصيل (مثال: البوابة الثانية، عمارة 120 أ)" class="w-full bg-sham-dark border border-sham-gold/25 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:border-sham-gold">
+                </div>
+
+                <div class="flex items-center justify-between text-base font-extrabold pt-1 border-t border-sham-gold/15">
+                    <span class="text-sham-cream/85">إجمالي الطلب:</span>
+                    <span id="cart-subtotal" class="text-2xl gold-gradient-text">0 ج.م</span>
+                </div>
+
+                <div class="grid grid-cols-1 gap-2">
+                    <button onclick="sendOrderWhatsApp()" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm sm:text-base shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>إرسال الطلب عبر واتساب</span>
+                    </button>
+                    <button onclick="copyOrderToClipboard()" class="w-full py-2.5 rounded-xl bg-sham-dark border border-sham-gold/30 text-sham-gold hover:bg-sham-gold/10 font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>نسخ تفاصيل الفاتورة</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC & COMPLETE MENU DATA -->
+    <script>
+        // Complete Menu Database extracted accurately from the PDF & Offer Flyer
+        const MENU_CATEGORIES = [
+            { id: 'all', name: 'الكل', icon: '✨' },
+            { id: 'offers', name: 'العروض وصواني التوفير', icon: '🔥' },
+            { id: 'shawarma_meals', name: 'وجبات الشاورما والغربي', icon: '🌯' },
+            { id: 'sandwiches', name: 'الساندوتشات', icon: '🥖' },
+            { id: 'meat_grills', name: 'مشويات اللحوم', icon: '🥩' },
+            { id: 'chicken_grills', name: 'فروج مشوي وفراخ عالفحم', icon: '🍗' },
+            { id: 'broasted', name: 'البروستد', icon: '🍖' },
+            { id: 'tajines', name: 'الطواجن والحواوشي', icon: '🍲' },
+            { id: 'pizza_pasta', name: 'البيتزا والمكرونة', icon: '🍕' },
+            { id: 'crepe_burger', name: 'الكريب والبرجر', icon: '🍔' },
+            { id: 'manakish', name: 'المناقيش والفطاير', icon: '🫓' },
+            { id: 'sides_drinks', name: 'السلطات والشوربات والمشروبات', icon: '🥗' }
+        ];
+
+        const MENU_ITEMS = [
+            // 1. العروض وصواني التوفير
+            {
+                id: 'offer_chicken_340',
+                cat: 'offers',
+                name: 'عرض الفرخة المشوية الخاص',
+                desc: 'فرخة مشوية (شواية أو على الفحم) تقدم مع: رز + بطاطس + تومية + مخلل + عيش (بدل 400 ج)',
+                badge: 'وفر 60 جنيه',
+                variants: [
+                    { label: 'على الفحم', price: 340 },
+                    { label: 'شواية', price: 340 }
+                ]
+            },
+            {
+                id: 'tray_hadaek',
+                cat: 'offers',
+                name: 'صينية حدائق الشام',
+                desc: 'فرخة شواية + 4 كرسبي + 6 أصابع كفتة + سلطة + 4 برك جبنة + 2 شوربة لسان عصفور',
+                badge: 'الأكثر طلباً للعزومات',
+                price: 900
+            },
+            {
+                id: 'tray_friends',
+                cat: 'offers',
+                name: 'صينية الصحاب',
+                desc: '6 قطع بروستد + 4 كفتة + 4 كبيبة + 8 قطع شيش + 2 شوربة لسان عصفور + تومية + مخلل',
+                badge: 'لشلة الصحاب',
+                price: 800
+            },
+            {
+                id: 'tray_family',
+                cat: 'offers',
+                name: 'صينية العائلة الملكية',
+                desc: 'فرخة فحم + نص كفتة + نص كباب + 4 سمبوسك + 4 كبيبة + 2 ملوخية + سلطة خضرا + طحينة',
+                badge: 'وليمة عائلية',
+                price: 1200
+            },
+
+            // 2. وجبات الشاورما والغربي
+            { id: 'sm_1', cat: 'shawarma_meals', name: 'وجبة شاورما عربي فراخ', desc: 'ساندوتش مقطع + بطاطس + ثومية + مخلل + كولسلو', price: 130 },
+            { id: 'sm_2', cat: 'shawarma_meals', name: 'وجبة شاورما عربي لحمة', desc: 'ساندوتش مقطع + بطاطس + ثومية + مخلل + كولسلو', price: 140 },
+            { id: 'sm_3', cat: 'shawarma_meals', name: 'وجبة شاورما عربي دبل فراخ', desc: '2 ساندوتش مقطع + بطاطس + ثومية + مخلل + كولسلو', price: 240 },
+            { id: 'sm_4', cat: 'shawarma_meals', name: 'وجبة شاورما عربي دبل لحمة', desc: '2 ساندوتش مقطع + بطاطس + ثومية + مخلل + كولسلو', price: 260 },
+            { id: 'sm_5', cat: 'shawarma_meals', name: 'وجبة شاورما مكس', desc: 'ساندوتش مقطع + بطاطس + ثومية + مخلل + كولسلو', price: 140 },
+            { id: 'sm_6', cat: 'shawarma_meals', name: 'وجبة شاورما عربي دبل مكس', desc: '2 ساندوتش مقطع + بطاطس + ثومية + مخلل + كولسلو', price: 260 },
+            { id: 'sm_7', cat: 'shawarma_meals', name: 'وجبة شاورما اكسترا فراخ', desc: 'شاورما + مشروم + موزريلا + بطاطس + مخلل + كولسلو + ثومية', price: 200 },
+            { id: 'sm_8', cat: 'shawarma_meals', name: 'وجبة شاورما اكسترا لحمة', desc: 'شاورما + مشروم + موزريلا + بطاطس + مخلل + كولسلو + ثومية', price: 210 },
+            { id: 'sm_9', cat: 'shawarma_meals', name: 'فتة شاورما فراخ', desc: 'أرز بسمتي + عيش محمص + بطاطس + ثومية + مخلل + كولسلو', variants: [{ label: 'وسط', price: 135 }, { label: 'كبير', price: 175 }] },
+            { id: 'sm_10', cat: 'shawarma_meals', name: 'فتة شاورما لحمة', desc: 'أرز بسمتي + عيش محمص + بطاطس + ثومية + مخلل + كولسلو', variants: [{ label: 'وسط', price: 150 }, { label: 'كبير', price: 190 }] },
+            { id: 'sm_11', cat: 'shawarma_meals', name: 'فتة شاورما مكس', desc: 'أرز بسمتي + عيش محمص + بطاطس + ثومية + مخلل + كولسلو', variants: [{ label: 'وسط', price: 150 }, { label: 'كبير', price: 190 }] },
+            { id: 'sm_12', cat: 'shawarma_meals', name: 'وجبة شاورما فرط 250 جرام فراخ', desc: 'بطاطس + ثومية + مخلل + كولسلو + عيش سوري', price: 190 },
+            { id: 'sm_13', cat: 'shawarma_meals', name: 'وجبة شاورما فرط 250 جرام لحمة', desc: 'بطاطس + ثومية + مخلل + كولسلو + عيش سوري', price: 215 },
+            { id: 'sm_14', cat: 'shawarma_meals', name: 'نص كيلو شاورما فراخ', desc: 'بطاطس + ثومية + مخلل + كولسلو + عيش سوري', price: 360 },
+            { id: 'sm_15', cat: 'shawarma_meals', name: 'كيلو شاورما فراخ', desc: 'بطاطس + ثومية + مخلل + كولسلو + عيش سوري', price: 675 },
+            { id: 'sm_16', cat: 'shawarma_meals', name: 'نص كيلو شاورما لحمة', desc: 'بطاطس + ثومية + مخلل + كولسلو + عيش سوري', price: 390 },
+            { id: 'sm_17', cat: 'shawarma_meals', name: 'كيلو شاورما لحمة', desc: 'بطاطس + ثومية + مخلل + كولسلو + عيش سوري', price: 750 },
+            { id: 'sm_18', cat: 'shawarma_meals', name: 'وجبة كرسبي (3 / 5 قطع)', desc: 'أرز بسمتي + بطاطس + ثومية + مخلل + كولسلو', variants: [{ label: '3 قطع', price: 170 }, { label: '5 قطع', price: 220 }] },
+            { id: 'sm_19', cat: 'shawarma_meals', name: 'وجبة بانيه (3 / 5 قطع)', desc: 'أرز بسمتي + بطاطس + ثومية + مخلل + كولسلو', variants: [{ label: '3 قطع', price: 170 }, { label: '5 قطع', price: 220 }] },
+            { id: 'sm_20', cat: 'shawarma_meals', name: 'وجبة زنجر (3 / 5 قطع)', desc: 'أرز بسمتي + بطاطس + ثومية + مخلل + كولسلو', variants: [{ label: '3 قطع', price: 170 }, { label: '5 قطع', price: 220 }] },
+            { id: 'sm_21', cat: 'shawarma_meals', name: 'وجبة كوردن بلو', desc: 'جبنة + مشروم + مدخن + صوص أبيض + أرز وبطاطس', price: 255 },
+            { id: 'sm_22', cat: 'shawarma_meals', name: 'وجبة أطفال ناجتس 5 قطع', desc: 'فراخ مقرمشة + بطاطس + ثومية + كولسلو', price: 185 },
+            { id: 'sm_23', cat: 'shawarma_meals', name: 'وجبة سكالوب ماليبو', desc: 'سكالوب + مشروم + مدخن + بطاطس + كول سلو + مخلل', price: 230 },
+            { id: 'sm_24', cat: 'shawarma_meals', name: 'وجبة تويستر', desc: 'دجاج مقرمش + شيدر + مدخن + بطاطس + كول سلو', price: 230 },
+            { id: 'sm_25', cat: 'shawarma_meals', name: 'وجبة فاهيتا فراخ', desc: 'بطاطس + ثومية + مخلل + كولسلو + عيش سوري', price: 230 },
+            { id: 'sm_26', cat: 'shawarma_meals', name: 'وجبة مكسيكي فراخ', desc: 'تقدم مع البطاطس والثومية والمخلل والكولسلو', price: 230 },
+            { id: 'sm_27', cat: 'shawarma_meals', name: 'وجبة فرانشيسكو فراخ', desc: 'تقدم مع البطاطس والثومية والمخلل والكولسلو', price: 230 },
+            { id: 'sm_28', cat: 'shawarma_meals', name: 'وجبة زنجر سوبريم', desc: 'تقدم مع البطاطس والثومية والمخلل والكولسلو', price: 230 },
+            { id: 'sm_29', cat: 'shawarma_meals', name: 'وجبة ماريا شاورما فراخ', desc: 'شاورما فراخ مع جبنة ومشروم على الطريقة الشامية', price: 200 },
+            { id: 'sm_30', cat: 'shawarma_meals', name: 'وجبة ماريا شاورما لحمة', desc: 'شاورما لحمة مع جبنة ومشروم على الطريقة الشامية', price: 210 },
+            { id: 'sm_31', cat: 'shawarma_meals', name: 'أرز ريزو بالفراخ المقرمشة', desc: 'أرز ريزو متبل مع قطع دجاج مقرمشة وصوص باربيكيو', price: 140 },
+
+            // 3. الساندوتشات (كايزر / شامي / صاج / فرنساوي)
+            { id: 'sw_1', cat: 'sandwiches', name: 'ساندوتش شاورما فراخ', desc: 'اختر نوع العيش المفضل لديك', variants: [{ label: 'كايزر', price: 80 }, { label: 'شامي', price: 80 }, { label: 'صاج', price: 90 }, { label: 'فرنساوي', price: 95 }] },
+            { id: 'sw_2', cat: 'sandwiches', name: 'ساندوتش شاورما فراخ جبنة', desc: 'شاورما فراخ غنية بالجبنة السايحة', variants: [{ label: 'صاج', price: 100 }, { label: 'فرنساوي', price: 105 }] },
+            { id: 'sw_3', cat: 'sandwiches', name: 'ساندوتش شاورما فراخ مع بطاطس', desc: 'شاورما فراخ + أصابع بطاطس مقرمشة وثومية', variants: [{ label: 'صاج', price: 100 }, { label: 'فرنساوي', price: 105 }] },
+            { id: 'sw_4', cat: 'sandwiches', name: 'ساندوتش شاورما لحمة', desc: 'شاورما لحمة بلدي بالتتبيلة الدمشقية', variants: [{ label: 'كايزر', price: 90 }, { label: 'شامي', price: 100 }, { label: 'صاج', price: 100 }, { label: 'فرنساوي', price: 105 }] },
+            { id: 'sw_5', cat: 'sandwiches', name: 'ساندوتش شاورما لحمة جبنة', desc: 'شاورما لحمة مع ميكس جبن سايحة', variants: [{ label: 'صاج', price: 110 }, { label: 'فرنساوي', price: 115 }] },
+            { id: 'sw_6', cat: 'sandwiches', name: 'ساندوتش شاورما لحمة مع بطاطس', desc: 'شاورما لحمة مع بطاطس وطحينة', variants: [{ label: 'كايزر / شامي', price: 95 }, { label: 'صاج', price: 105 }, { label: 'فرنساوي', price: 110 }] },
+            { id: 'sw_7', cat: 'sandwiches', name: 'ساندوتش شاورما مكس', desc: 'مزيج شاورما الفراخ واللحمة', variants: [{ label: 'صاج', price: 105 }, { label: 'فرنساوي', price: 110 }] },
+            { id: 'sw_8', cat: 'sandwiches', name: 'ساندوتش شاورما مكس بالجبنة', desc: 'مكس شاورما مع جبنة موزريلا سايحة', variants: [{ label: 'صاج', price: 105 }, { label: 'فرنساوي', price: 110 }] },
+            { id: 'sw_9', cat: 'sandwiches', name: 'ساندوتش شاورما مكس بالبطاطس', desc: 'مكس شاورما مع بطاطس مقرمشة', variants: [{ label: 'صاج', price: 105 }, { label: 'فرنساوي', price: 110 }] },
+            { id: 'sw_10', cat: 'sandwiches', name: 'ساندوتش شاورما اكسترا (فراخ أو لحمة)', desc: 'حشوة مضاعفة مع مشروم وجبنة', variants: [{ label: 'صاج', price: 115 }, { label: 'فرنساوي', price: 120 }] },
+            { id: 'sw_11', cat: 'sandwiches', name: 'ساندوتش كرسبي', desc: 'صدور دجاج مقرمشة مع صوص وثومية', variants: [{ label: 'صاج', price: 100 }, { label: 'فرنساوي', price: 110 }] },
+            { id: 'sw_12', cat: 'sandwiches', name: 'ساندوتش زنجر', desc: 'دجاج زنجر حار مقرمش', variants: [{ label: 'صاج', price: 100 }, { label: 'فرنساوي', price: 110 }] },
+            { id: 'sw_13', cat: 'sandwiches', name: 'ساندوتش بانيه', desc: 'فراخ بانيه ذهبية مقرمشة', variants: [{ label: 'صاج', price: 100 }, { label: 'فرنساوي', price: 110 }] },
+            { id: 'sw_14', cat: 'sandwiches', name: 'ساندوتش شيش طاووق', desc: 'قطع شيش طاووق متبلة', variants: [{ label: 'صاج', price: 90 }, { label: 'فرنساوي', price: 105 }] },
+            { id: 'sw_15', cat: 'sandwiches', name: 'ساندوتش شيش طاووق فحم', desc: 'شيش طاووق مشوي على الفحم', variants: [{ label: 'صاج', price: 90 }, { label: 'فرنساوي', price: 105 }] },
+            { id: 'sw_16', cat: 'sandwiches', name: 'ساندوتش كفتة مشوية', desc: 'كفتة مشوية مع طحينة وبقدونس', variants: [{ label: 'صاج', price: 100 }, { label: 'فرنساوي', price: 105 }] },
+            { id: 'sw_17', cat: 'sandwiches', name: 'ساندوتش كبيبة مقلي', desc: 'كبيبة شامية مقرمشة', variants: [{ label: 'صاج', price: 65 }, { label: 'فرنساوي', price: 70 }] },
+            { id: 'sw_18', cat: 'sandwiches', name: 'ساندوتش بطاطس سوري', desc: 'بطاطس محمرة + ثومية + كولسلو + مخلل', variants: [{ label: 'صاج', price: 45 }, { label: 'فرنساوي', price: 50 }] },
+            { id: 'sw_19', cat: 'sandwiches', name: 'ساندوتش بطاطس جبنة', desc: 'بطاطس سوري مع صوص الجبنة', variants: [{ label: 'صاج', price: 55 }, { label: 'فرنساوي', price: 60 }] },
+            { id: 'sw_20', cat: 'sandwiches', name: 'ساندوتش سكالوب ماليبو', desc: 'سكالوب دجاج + مدخن + جبنة', variants: [{ label: 'صاج', price: 110 }, { label: 'فرنساوي', price: 120 }] },
+            { id: 'sw_21', cat: 'sandwiches', name: 'ساندوتش تويستر', desc: 'دجاج مقرمش + شيدر + مدخن', variants: [{ label: 'صاج', price: 110 }, { label: 'فرنساوي', price: 120 }] },
+            { id: 'sw_22', cat: 'sandwiches', name: 'ساندوتش فاهيتا فراخ', desc: 'شرائح دجاج مع فلفل ألوان وبصل وتوابل مكسيكية', variants: [{ label: 'صاج', price: 110 }, { label: 'فرنساوي', price: 120 }] },
+            { id: 'sw_23', cat: 'sandwiches', name: 'ساندوتش مكسيكي فراخ', desc: 'دجاج متبل بالصوص المكسيكي الحار', variants: [{ label: 'صاج', price: 110 }, { label: 'فرنساوي', price: 120 }] },
+            { id: 'sw_24', cat: 'sandwiches', name: 'ساندوتش فرانشيسكو فراخ', desc: 'دجاج مشوي مع مشروم وجبنة ذائبة', variants: [{ label: 'صاج', price: 110 }, { label: 'فرنساوي', price: 120 }] },
+            { id: 'sw_25', cat: 'sandwiches', name: 'ساندوتش زنجر سوبريم', desc: 'زنجر مقرمش + تركي مدخن + شيدر', variants: [{ label: 'صاج', price: 110 }, { label: 'فرنساوي', price: 120 }] },
+
+            // 4. مشويات اللحوم
+            { id: 'mg_1', cat: 'meat_grills', name: 'وجبة كفتة مشوية', desc: 'تقدم مع سلطة وطحينة وبصل وطماطم مشوي وعيش', price: 210 },
+            { id: 'mg_2', cat: 'meat_grills', name: 'وجبة كباب مشوي', desc: 'تقدم مع سلطة وطحينة وبصل وطماطم مشوي وعيش', price: 225 },
+            { id: 'mg_3', cat: 'meat_grills', name: 'وجبة مشويات مكس', desc: 'تشكيلة كفتة وكباب وشيش مع سلطة وطحينة وعيش', price: 225 },
+            { id: 'mg_4', cat: 'meat_grills', name: 'وجبة شيش طاووق', desc: 'تقدم مع سلطة وطحينة وبصل وطماطم مشوي وعيش', price: 225 },
+            { id: 'mg_5', cat: 'meat_grills', name: 'كفتة مشوية بالوزن', desc: 'تقدم مع سلطة وطحينة وبصل وطماطم مشوي', variants: [{ label: 'نص كيلو', price: 365 }, { label: 'كيلو كامل', price: 720 }] },
+            { id: 'mg_6', cat: 'meat_grills', name: 'كباب مشوي بالوزن', desc: 'تقدم مع سلطة وطحينة وبصل وطماطم مشوي', variants: [{ label: 'نص كيلو', price: 385 }, { label: 'كيلو كامل', price: 760 }] },
+            { id: 'mg_7', cat: 'meat_grills', name: 'كيلو مشاوي مشكل', desc: 'تشكيلة فاخرة من الكباب والكفتة والشيش طاووق مع السلطات', price: 720 },
+            { id: 'mg_8', cat: 'meat_grills', name: 'كيلو شيش طاووق مشوي', desc: 'تقدم مع سلطة وطحينة وبصل وطماطم مشوي', price: 570 },
+
+            // 5. فروج مشوي وفراخ عالفحم
+            { id: 'cg_1', cat: 'chicken_grills', name: 'فرخة مشوية عالفحم (وجبة كاملة)', desc: 'تقدم مع رز وبطاطس وطحينة وسلطة خضرا وعيش', price: 400 },
+            { id: 'cg_2', cat: 'chicken_grills', name: 'نصف فرخة مشوية عالفحم', desc: 'تقدم مع رز وبطاطس وطحينة وسلطة خضرا', price: 210 },
+            { id: 'cg_3', cat: 'chicken_grills', name: 'فرخة مشوية عالفحم سادة', desc: 'بدون أرز', price: 385 },
+            { id: 'cg_4', cat: 'chicken_grills', name: 'نصف فرخة مشوية عالفحم سادة', desc: 'بدون أرز', price: 200 },
+            { id: 'cg_5', cat: 'chicken_grills', name: 'فرخة بالبطاطس وصوص أحمر', desc: 'تقدم مع رز وبطاطس وصوص أحمر مميز', price: 420 },
+            { id: 'cg_6', cat: 'chicken_grills', name: 'نصف فرخة بالخضار وصوص أحمر', desc: 'تقدم مع رز وبطاطس وصوص أحمر', price: 220 },
+            { id: 'cg_7', cat: 'chicken_grills', name: 'فروج مشوي (فرخة شواية)', desc: 'تقدم مع رز وبطاطس وتومية ومخلل وعيش', price: 400 },
+            { id: 'cg_8', cat: 'chicken_grills', name: 'فرخة شواية سادة', desc: 'بدون أرز', price: 385 },
+            { id: 'cg_9', cat: 'chicken_grills', name: 'نص فرخة شواية', desc: 'تقدم مع رز وبطاطس وتومية ومخلل وعيش', price: 210 },
+            { id: 'cg_10', cat: 'chicken_grills', name: 'نص فرخة شواية سادة', desc: 'بدون أرز', price: 200 },
+            { id: 'cg_11', cat: 'chicken_grills', name: 'ربع فرخة مشوية صدر', desc: 'تقدم مع رز وبطاطس وتومية ومخلل وعيش', price: 125 },
+            { id: 'cg_12', cat: 'chicken_grills', name: 'ربع فرخة مشوية ورك', desc: 'تقدم مع رز وبطاطس وتومية ومخلل وعيش', price: 120 },
+            { id: 'cg_13', cat: 'chicken_grills', name: 'ربع فرخة مشوية دبل ورك', desc: 'تقدم مع رز وبطاطس وتومية ومخلل وعيش', price: 200 },
+
+            // 6. البروستد
+            { id: 'br_1', cat: 'broasted', name: 'وجبة بروستد 2 قطعة', desc: 'جميع الوجبات تقدم مع رز وتومية ومخلل وعيش', price: 135 },
+            { id: 'br_2', cat: 'broasted', name: 'وجبة بروستد 3 قطع', desc: 'جميع الوجبات تقدم مع رز وتومية ومخلل وعيش', price: 185 },
+            { id: 'br_3', cat: 'broasted', name: 'وجبة بروستد 4 قطع', desc: 'جميع الوجبات تقدم مع رز وتومية ومخلل وعيش', price: 220 },
+            { id: 'br_4', cat: 'broasted', name: 'وجبة بروستد 8 قطع (عائلية)', desc: 'تقدم مع رز وتومية ومخلل وعيش', price: 420 },
+            { id: 'br_5', cat: 'broasted', name: 'فرخة بروستد سادة 8 قطع', desc: '8 قطع دجاج بروستد مقرمش سادة', price: 400 },
+
+            // 7. الطواجن والحواوشي
+            { id: 'tj_1', cat: 'tajines', name: 'طاجن بامية باللحمة', desc: 'بامية مطهوة بالصلصة واللحم البلدي في الفرن', price: 190 },
+            { id: 'tj_2', cat: 'tajines', name: 'طاجن بامية سادة', desc: 'طاجن بامية بالصلصة المتبلة في الفرن', price: 90 },
+            { id: 'tj_3', cat: 'tajines', name: 'طاجن لحمة بالبصل', desc: 'قطع لحم بلدي مكرملة بالبصل والتوابل', price: 195 },
+            { id: 'tj_4', cat: 'tajines', name: 'طاجن تورلي باللحمة', desc: 'خضار مشكل بالفرن مع قطع اللحم', price: 190 },
+            { id: 'tj_5', cat: 'tajines', name: 'طاجن تورلي سادة', desc: 'خضار مشكل طازج مطهو في الفرن', price: 90 },
+            { id: 'tj_6', cat: 'tajines', name: 'طاجن لحمة بالبطاطس', desc: 'شرائح بطاطس بالصلصة مع قطع اللحم', price: 190 },
+            { id: 'tj_7', cat: 'tajines', name: 'طاجن بطاطس سادة', desc: 'صينية بطاطس بالفرن', price: 90 },
+            { id: 'tj_8', cat: 'tajines', name: 'طاجن ملوخية', desc: 'ملوخية خضراء بالطشة', price: 60 },
+            { id: 'tj_9', cat: 'tajines', name: 'طاجن عكاوي', desc: 'طاجن عكاوي فاخر مطهو ببطء في الفرن', price: 210 },
+            { id: 'tj_10', cat: 'tajines', name: 'طاجن كفتة هندي', desc: 'كفتة مشوية بالصوص الأحمر والخضار في الفرن', price: 210 },
+            { id: 'tj_11', cat: 'tajines', name: 'حواوشي عالفحم', desc: 'رغيف حواوشي بلدي مشوي على الفحم', price: 100 },
+
+            // 8. البيتزا والمكرونة
+            { id: 'pz_1', cat: 'pizza_pasta', name: 'بيتزا حدائق الشام الخاصة', desc: 'مكس أجبان + مكس لحوم + صوص خاص', variants: [{ label: 'وسط', price: 150 }, { label: 'كبير', price: 175 }] },
+            { id: 'pz_2', cat: 'pizza_pasta', name: 'بيتزا سوبر سوبريم', desc: 'صوص + موزريلا + سلامي + هوت دوج + سجق', variants: [{ label: 'وسط', price: 130 }, { label: 'كبير', price: 155 }] },
+            { id: 'pz_3', cat: 'pizza_pasta', name: 'بيتزا ببروني', desc: 'صوص + موزريلا + سلامي + سجق', variants: [{ label: 'وسط', price: 130 }, { label: 'كبير', price: 155 }] },
+            { id: 'pz_4', cat: 'pizza_pasta', name: 'بيتزا الفصول الأربعة', desc: 'أربع نكهات متنوعة في بيتزا واحدة', variants: [{ label: 'وسط', price: 130 }, { label: 'كبير', price: 140 }] },
+            { id: 'pz_5', cat: 'pizza_pasta', name: 'بيتزا مارجريتا', desc: 'صوص طماطم إيطالي + جبنة موزريلا', variants: [{ label: 'وسط', price: 125 }, { label: 'كبير', price: 140 }] },
+            { id: 'pz_6', cat: 'pizza_pasta', name: 'بيتزا مكس أجبان', desc: 'صوص + موزريلا + كرافت + شيدر + رومي', variants: [{ label: 'وسط', price: 125 }, { label: 'كبير', price: 145 }] },
+            { id: 'pz_7', cat: 'pizza_pasta', name: 'بيتزا بسطرمة', desc: 'صوص + موزريلا + بسطرمة بلدي', variants: [{ label: 'وسط', price: 135 }, { label: 'كبير', price: 160 }] },
+            { id: 'pz_8', cat: 'pizza_pasta', name: 'بيتزا تركي مدخن', desc: 'صوص + موزريلا + طماطم + فلفل + مشروم + تركي', variants: [{ label: 'وسط', price: 135 }, { label: 'كبير', price: 160 }] },
+            { id: 'pz_9', cat: 'pizza_pasta', name: 'بيتزا شيش طاووق', desc: 'صوص + موزريلا + خضار + قطع شيش فراخ', variants: [{ label: 'وسط', price: 130 }, { label: 'كبير', price: 160 }] },
+            { id: 'pz_10', cat: 'pizza_pasta', name: 'بيتزا تونة', desc: 'صوص + موزريلا + قطع تونة', variants: [{ label: 'وسط', price: 130 }, { label: 'كبير', price: 160 }] },
+            { id: 'pz_11', cat: 'pizza_pasta', name: 'بيتزا سلامي / هوت دوج / سجق', desc: 'اختر نوع اللحوم المفضل مع صوص وموزريلا', variants: [{ label: 'وسط', price: 130 }, { label: 'كبير', price: 150 }] },
+            { id: 'pz_12', cat: 'pizza_pasta', name: 'بيتزا خضار / مشروم', desc: 'خضروات طازجة ومشروم وموزريلا', variants: [{ label: 'وسط', price: 120 }, { label: 'كبير', price: 145 }] },
+            { id: 'pa_1', cat: 'pizza_pasta', name: 'مكرونة بولو سيباستيالي', desc: 'فلفل ألوان + مشروم + فراخ + صوص أبيض + موزريلا', variants: [{ label: 'وسط', price: 120 }, { label: 'كبير', price: 150 }] },
+            { id: 'pa_2', cat: 'pizza_pasta', name: 'مكرونة شاورما (صوص أبيض أو أحمر)', desc: 'مكرونة مع شاورما غنية بالصوص والموزريلا', variants: [{ label: 'وسط', price: 120 }, { label: 'كبير', price: 150 }] },
+            { id: 'pa_3', cat: 'pizza_pasta', name: 'مكرونة بلونيز', desc: 'لحمة مفرومة + صوص أحمر + موزريلا', variants: [{ label: 'وسط', price: 120 }, { label: 'كبير', price: 150 }] },
+            { id: 'pa_4', cat: 'pizza_pasta', name: 'مكرونة كواترو مكس جبن', desc: 'تشكيلة أربع أجبان مع صوص أبيض كريمي', variants: [{ label: 'وسط', price: 120 }, { label: 'كبير', price: 150 }] },
+            { id: 'pa_5', cat: 'pizza_pasta', name: 'مكرونة ألمونجي (مشروم)', desc: 'مشروم طازج + صوص أبيض + موزريلا', variants: [{ label: 'وسط', price: 120 }, { label: 'كبير', price: 150 }] },
+            { id: 'pa_6', cat: 'pizza_pasta', name: 'مكرونة بيتزا', desc: 'خضار + مشروم + زيتون + سوسيس + صوص أحمر وموزريلا', variants: [{ label: 'وسط', price: 120 }, { label: 'كبير', price: 150 }] },
+            { id: 'pa_7', cat: 'pizza_pasta', name: 'مكرونة أربياتا', desc: 'صوص أحمر إيطالي متبل وبقدونس', variants: [{ label: 'وسط', price: 115 }, { label: 'كبير', price: 135 }] },
+
+            // 9. الكريب والبرجر
+            { id: 'cr_1', cat: 'crepe_burger', name: 'كريب شاورما فراخ', desc: 'كريب مقرمش محشو شاورما فراخ وموزريلا وبطاطس', price: 120 },
+            { id: 'cr_2', cat: 'crepe_burger', name: 'كريب شاورما لحمة', desc: 'كريب مقرمش محشو شاورما لحمة وموزريلا وبطاطس', price: 120 },
+            { id: 'cr_3', cat: 'crepe_burger', name: 'كريب كرسبي', desc: 'قطع دجاج كرسبي مع جبنة وصوصات', price: 120 },
+            { id: 'cr_4', cat: 'crepe_burger', name: 'كريب زنجر سبايسي', desc: 'زنجر حار مقرمش مع جبنة سايحة', price: 120 },
+            { id: 'cr_5', cat: 'crepe_burger', name: 'كريب شيش طاووق', desc: 'قطع شيش طاووق مشوية مع جبنة وبطاطس', price: 120 },
+            { id: 'cr_6', cat: 'crepe_burger', name: 'كريب فاهيتا', desc: 'فاهيتا دجاج مع فلفل ألوان وموزريلا', price: 120 },
+            { id: 'cr_7', cat: 'crepe_burger', name: 'كريب بانيه', desc: 'قطع بانيه مقرمشة مع جبنة وبطاطس', price: 120 },
+            { id: 'cr_8', cat: 'crepe_burger', name: 'كريب بطاطا', desc: 'بطاطس محمرة + موزريلا + كاتشب ومايونيز', price: 65 },
+            { id: 'bg_1', cat: 'crepe_burger', name: 'برجر سادة (فراخ أو لحمة)', desc: 'قطعة برجر مشوية مع خس وطماطم وصوص', variants: [{ label: 'برجر لحمة', price: 100 }, { label: 'برجر فراخ', price: 100 }] },
+            { id: 'bg_2', cat: 'crepe_burger', name: 'برجر جبنة (فراخ أو لحمة)', desc: 'مع شريحة جبنة شيدر سايحة', variants: [{ label: 'برجر لحمة جبنة', price: 110 }, { label: 'برجر فراخ جبنة', price: 110 }] },
+            { id: 'bg_3', cat: 'crepe_burger', name: 'برجر جبنة وبيض', desc: 'برجر مع جبنة شيدر وبيض مقلي', price: 120 },
+            { id: 'bg_4', cat: 'crepe_burger', name: 'برجر كرسبي بصوص الشيدر', desc: 'قطعة دجاج كرسبي غرقانة في صوص الشيدر', price: 110 },
+
+            // 10. المناقيش والفطاير الشامية
+            { id: 'mn_1', cat: 'manakish', name: 'منقوشة زعتر / محمرة / سبانخ / زيتون', desc: 'عجينة شامية طازجة مخبوزة في الفرن', variants: [{ label: 'زعتر', price: 20 }, { label: 'محمرة', price: 20 }, { label: 'سبانخ', price: 20 }, { label: 'زيتون', price: 20 }] },
+            { id: 'mn_2', cat: 'manakish', name: 'منقوشة لبنة زعتر / لبنة خضار', desc: 'لبنة شامية طازجة على العجين', variants: [{ label: 'لبنة زعتر', price: 30 }, { label: 'لبنة خضار', price: 30 }] },
+            { id: 'mn_3', cat: 'manakish', name: 'منقوشة حلوم زعتر / حلوم خضار', desc: 'جبنة حلوم مشوية مع الزعتر أو الخضار', variants: [{ label: 'حلوم زعتر', price: 35 }, { label: 'حلوم خضار', price: 35 }] },
+            { id: 'mn_4', cat: 'manakish', name: 'منقوشة محمرة زعتر / زعتر خضار', desc: 'خلطة شامية تقليدية', variants: [{ label: 'محمرة زعتر', price: 35 }, { label: 'زعتر خضار', price: 35 }] },
+            { id: 'mn_5', cat: 'manakish', name: 'فطيرة سواريه / سنفورة', desc: 'فطائر شامية مميزة من الفرن', variants: [{ label: 'سواريه', price: 35 }, { label: 'سنفورة', price: 35 }] },
+            { id: 'mn_6', cat: 'manakish', name: 'مناقيش الأجبان (شامية / رومي / شيدر / حلوم / عكاوي / موزريلا)', desc: 'اختر نوع الجبنة المفضلة', variants: [{ label: 'جبنة شامية', price: 30 }, { label: 'عكاوي', price: 30 }, { label: 'حلوم', price: 30 }, { label: 'موزريلا', price: 30 }, { label: 'شيدر / رومي', price: 30 }, { label: 'لبنة', price: 35 }] },
+            { id: 'mn_7', cat: 'manakish', name: 'منقوشة مشكلة أجبان / شختورة شامية', desc: 'تشكيلة أجبان غنية أو شختورة شامية', variants: [{ label: 'مشكلة أجبان', price: 40 }, { label: 'شختورة شامية', price: 40 }] },
+            { id: 'mn_8', cat: 'manakish', name: 'مناقيش ميكسات لحوم وموزريلا', desc: 'هوت دوج / شيش / بسطرمة / تركي مدخن / لانشون / سلامي مع موزريلا', variants: [{ label: 'شيش موزريلا', price: 40 }, { label: 'بسطرمة موزريلا', price: 40 }, { label: 'تركي مدخن موزريلا', price: 40 }, { label: 'هوت دوج / سلامي / لانشون', price: 40 }] },
+            { id: 'mn_9', cat: 'manakish', name: 'صفيحة شامية / صفيحة باللبن', desc: 'لحم مفر
